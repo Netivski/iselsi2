@@ -80,59 +80,59 @@ exec dbo.u_sp_titular_registar         -- Dados gerais do Titular
                                       ,1
 
 
-exec dbo.u_sp_titular_editar         -- Dados gerais do Titular
-                                       '203411625'
-                                      ,'Paulo Jorge Maximino Batista Pires'
-                                      ,'1975-03-18'
-                                      ,'C'
-                                      ,12456.11
-                                      ,'002134638754802341125'
-                                      ,0 
-                                      -- Dados gerais da Morada 
-                                      ,'Rual Vale da Bela Vsta'
-                                      ,'Nº 18'
-                                      ,2710
-                                      ,682
-                                      ,'Sintra'
-                                      -- Dados Gerais de Contactos
-                                      ,1
-                                      ,'912380994'
-                                      ,0
-                                      ,3
-                                      ,'219244362'
-                                      ,1
-
-
-print 'Insert Titular - Teste 2.b'
-exec dbo.u_sp_dossier_obras_registar '203411625', null, 'EUR', 2, 5000, 1, 300000
-update dossier set situacao = 'A' where idDossier = 13
-exec u_sp_cal_rendas 13
-exec dbo.u_sp_u_sp_prestacao_pagamento 13, 100
-
-exec dbo.u_sp_titular_apresentacao_tx_esforco '203411625'
-exec dbo.u_sp_listar_clientes_incumprimento
-
-exec u_sp_cal_credito_mal_parado 
-
-select * from titular
-
-exec u_sp_titular_creditos '203411625'
-
-select * from produto
-select * from titular
-select * from dossier
-select * from CreditoObra
-select * from saldo
-select * from evento
-select * from EventoSaldo
-
-select * from titularcontacto
-
-delete EventoSaldo
-delete evento
-delete saldo
-delete CreditoObra
-delete dossier
+--exec dbo.u_sp_titular_editar         -- Dados gerais do Titular
+--                                       '203411625'
+--                                      ,'Paulo Jorge Maximino Batista Pires'
+--                                      ,'1975-03-18'
+--                                      ,'C'
+--                                      ,12456.11
+--                                      ,'002134638754802341125'
+--                                      ,0 
+--                                      -- Dados gerais da Morada 
+--                                      ,'Rual Vale da Bela Vsta'
+--                                      ,'Nº 18'
+--                                      ,2710
+--                                      ,682
+--                                      ,'Sintra'
+--                                      -- Dados Gerais de Contactos
+--                                      ,1
+--                                      ,'912380994'
+--                                      ,0
+--                                      ,3
+--                                      ,'219244362'
+--                                      ,1
+--
+--
+--print 'Insert Titular - Teste 2.b'
+--exec dbo.u_sp_dossier_obras_registar '203411625', null, 'EUR', 2, 5000, 1, 300000
+--update dossier set situacao = 'A' where idDossier = 13
+--exec u_sp_cal_rendas 13
+--exec dbo.u_sp_u_sp_prestacao_pagamento 13, 100
+--
+--exec dbo.u_sp_titular_apresentacao_tx_esforco '203411625'
+--exec dbo.u_sp_listar_clientes_incumprimento
+--
+--exec u_sp_cal_credito_mal_parado 
+--
+--select * from titular
+--
+--exec u_sp_titular_creditos '203411625'
+--
+--select * from produto
+--select * from titular
+--select * from dossier
+--select * from CreditoObra
+--select * from saldo
+--select * from evento
+--select * from EventoSaldo
+--
+--select * from titularcontacto
+--
+--delete EventoSaldo
+--delete evento
+--delete saldo
+--delete CreditoObra
+--delete dossier
 
 set nocount off
 
