@@ -6,6 +6,8 @@ sqlcmd.exe -E -S"SNT_WKS02\SQLEXPRESS" -dsi2     -i"005 - functions.sql"
 sqlcmd.exe -E -S"SNT_WKS02\SQLEXPRESS" -dsi2     -i"006 - index.sql"
 sqlcmd.exe -E -S"SNT_WKS02\SQLEXPRESS" -dsi2     -i"007 - stored procedures.sql"
 sqlcmd.exe -E -S"SNT_WKS02\SQLEXPRESS" -dsi2     -i"008 - data.sql"
+sqlcmd.exe -E -S"SNT_WKS02\SQLEXPRESS" -dsi2     -i"009 - Create User.sql"
+sqlcmd.exe -E -S"SNT_WKS02\SQLEXPRESS" -dsi2     -i"010 - grantuser.sql"
 
 
 @pause
