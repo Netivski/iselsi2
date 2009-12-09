@@ -1,3 +1,9 @@
+use si2
+
+go
+
+
+
 if exists( select 1 from sysobjects where id = object_id('u_f_trim') and type = 'FN' ) drop function u_f_trim
 
 go

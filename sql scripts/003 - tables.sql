@@ -1,3 +1,8 @@
+use si2
+
+go
+
+
 print 'Create Table Morada'
 go
 Create Table dbo.Morada(  IdMorada   dbo.TIdentificador  identity( 1, 1 ) 

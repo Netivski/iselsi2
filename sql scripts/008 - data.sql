@@ -1,3 +1,8 @@
+use si2
+
+go
+
+
 set nocount on
 
 print 'Insert lkMoeda data'
