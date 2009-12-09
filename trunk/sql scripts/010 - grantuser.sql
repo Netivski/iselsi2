@@ -1,3 +1,8 @@
+use si2
+
+go
+
+
 declare @username varchar(50)
 declare @dbname varchar(50)
 declare @ObjectName sysname

@@ -1,3 +1,9 @@
+
+use si2
+
+go
+
+
 create view dbo.vDossierActivo
 as
   select * from dossier

@@ -1,3 +1,8 @@
+use si2
+
+go
+
+
 print 'Create Procedure u_sp_lkMoeda_add'
 go
 create proc dbo.u_sp_lkMoeda_add @nome char(3), @nomeLongo TTxt50, @valorReferencia decimal(10, 5)

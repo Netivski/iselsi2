@@ -1,3 +1,8 @@
+use si2
+
+go
+
+
 print 'Table Morada - Create Primary Key pk_morada'
 go
 alter table dbo.morada add constraint pk_morada primary key clustered (
