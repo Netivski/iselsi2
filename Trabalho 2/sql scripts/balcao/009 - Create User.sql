@@ -1,0 +1,8 @@
+USE [master]
+GO
+CREATE LOGIN [balcao] WITH PASSWORD=N'balcao.', DEFAULT_DATABASE=[balcao], DEFAULT_LANGUAGE=[Português], CHECK_EXPIRATION=OFF, CHECK_POLICY=OFF
+GO
+USE [balcao]
+GO
+CREATE USER [balcao] FOR LOGIN [balcao]
+GO

@@ -1,5 +1,10 @@
-FOR /f "tokens=*" %%G IN ('dir /b *.sql') DO (
-  sqlcmd.exe -E -S"localhost" -dmaster  -i"%%G")
+cd sede
+call install.cmd
+cd ..
 
+
+cd balcao
+call install.cmd
+cd ..
 
 @pause
