@@ -168,3 +168,44 @@ as
   
 go
 
+print 'Create Procedure u_sp_view_generator '
+go
+
+create proc dbo.u_sp_view_generator @objectName sysname
+as
+declare @nome    sysname
+declare @dbname  sysname
+declare @sqlStat varchar(max)
+declare @switch  varchar(25) 
+declare @vName   sysname
+
+set @sqlStat = ''
+declare crs_balcao cursor for  select nome, dbname from balcao 
+open crs_balcao
+fetch next from crs_balcao into @nome, @dbname
+  while @@fetch_status = 0
+    begin
+      set @sqlStat = @sqlStat + 'select * from ' + @nome + '.' + @dbname + '.dbo.' +  @objectName + ' Union '
+      fetch next from crs_balcao into @nome, @dbname
+    end
+close crs_balcao
+deallocate crs_balcao
+
+
+if len( @sqlStat ) > 0   
+  begin
+    set @sqlStat = substring( @sqlStat, 1, len( @sqlStat)  - len('Union ') ) 
+    set @vName   = 'vSede' + @objectName
+    
+    if object_id( @vName ) is null
+      set @switch = 'create'
+    else
+      set @switch = 'alter'
+      
+    set @sqlStat = @switch + ' view ' + @vName + ' As ' + @sqlStat
+
+    print @sqlStat 
+    execute( @sqlStat )    
+  end 
+
+
