@@ -74,7 +74,27 @@ as
 
 
 go
+print 'Create Procedure u_sp_balcao_add_subscriber'
 
+go
+
+create proc dbo.u_sp_balcao_add_subscriber @nome sysname
+as
+  declare @dbName sysname
+  select @dbName = nome from balcao where nome = @nome
+
+  if @@rowcount = 0
+    begin
+      RAISERROR('O balcão não existe no sistema.', 1, 2) WITH LOG
+      return
+    end
+ 
+    exec sede..sp_addsubscription @publication = N'sede', @subscriber = N'dst01w30', @destination_db=@dbName, @subscription_type = N'Push', @sync_type = N'automatic', @article = N'all', @update_mode = N'read only', @subscriber_type = 0
+    exec sede..sp_addpushsubscription_agent @publication = N'sede', @subscriber = N'dst01w30', @subscriber_db=@dbName, @job_login = null, @job_password = null, @subscriber_security_mode = 1, @frequency_type = 64, @frequency_interval = 0, @frequency_relative_interval = 0, @frequency_recurrence_factor = 0, @frequency_subday = 0, @frequency_subday_interval = 0, @active_start_time_of_day = 0, @active_end_time_of_day = 235959, @active_start_date = 20091229, @active_end_date = 99991231, @enabled_for_syncmgr = N'False', @dts_package_location = N'Distributor'
+  
+go
+
+  
 print 'Create Procedure u_sp_balcao_drop_link'
 go
 
