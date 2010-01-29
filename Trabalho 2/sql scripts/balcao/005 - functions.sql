@@ -111,3 +111,25 @@ as
 
 
 go
+
+if exists( select 1 from sysobjects where id = object_id('u_f_total_creditos_avalista') and type = 'FN' ) drop function u_f_total_creditos_avalista
+go
+
+
+create function dbo.u_f_total_creditos_avalista( @nifAvalista  dbo.TNif )
+returns dbo.TMontante
+as
+  begin
+    declare @montante TMontante
+    
+    select @montante = sum( s.montante ) 
+    from vDossierActivo d, saldo s
+    where d.iddossier               = s.iddossier
+      and s.saldo                   = 'MntKVincendo'
+      and isnull(d.nifAvalista, 0)  = @nifAvalista
+
+    return  @montante
+  end
+
+
+

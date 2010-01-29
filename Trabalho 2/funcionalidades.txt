@@ -1,0 +1,32 @@
+1 - calculo da tx. de esforço do cliente
+    deverá ser replicada pelos vários balcões
+        definição do processo
+            a aplicação não mantem estado sobre a taxa de esforço
+            do titular. A validação se o cliente pode contrair o crédito
+            tem como base o atributo titular.iFinanciavel
+            este atributo é alterado pela sede, através do invocação 
+            ao procesimento u_sp_titular_financialvel
+
+            contudo está implementado a backlist. um cliente não pode ser 
+            financiavel se estiver na blacklist.
+       
+
+2 - calculo do limite estabelicido para o avalista
+    deverá ser replicado para os vários balções
+            suportado na tabela AvalistaLimite
+
+
+
+3 - noção de cliente em estado de incumprimento
+             vTitularIncumprimento 
+
+4 - a sede tem acesso aos créditos dos clientes
+    e ao dos avalistas
+              vTotalMntKVincendo
+              vTotalMntKVincendoAvalista
+
+5 - pagamento de uma prestação em qq um dos balcões
+    não pode ser superior a 24 horas
+
+6 -  
+
