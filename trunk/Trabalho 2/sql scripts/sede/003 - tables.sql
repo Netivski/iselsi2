@@ -68,3 +68,19 @@ Create Table dbo.Balcao(
                        ) on [primary]
 
 
+go
+
+print 'Create Table blacklist'
+go
+
+create table dbo.Blacklist ( nif  dbo.TNif ) on [primary]
+
+go
+
+print 'Create Table AvalistaLimite'
+go
+
+create table dbo.AvalistaLimite( nifAvalista  dbo.TNif, montante tMontante ) on [primary]
+
+
+

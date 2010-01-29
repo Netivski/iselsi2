@@ -231,6 +231,35 @@ alter table dbo.balcao add constraint pk_balcao primary key clustered (
                                                                               ,allow_row_locks = on
                                                                               ,allow_page_locks = on
                                                                             )on [primary]
+go
+
+alter table dbo.blacklist add constraint pk_blacklist primary key clustered (
+                                                                         nif
+	                                                                  ) with(  pad_index = off
+                                                                              ,fillfactor = 30
+                                                                              ,statistics_norecompute = off
+                                                                              ,ignore_dup_key = off
+                                                                              ,allow_row_locks = on
+                                                                              ,allow_page_locks = on
+                                                                            )on [primary]
+
+
+
+go
+
+alter table dbo.AvalistaLimite add constraint pk_avalistalimite primary key clustered (
+                                                                         nifAvalista 
+	                                                                  ) with(  pad_index = off
+                                                                              ,fillfactor = 30
+                                                                              ,statistics_norecompute = off
+                                                                              ,ignore_dup_key = off
+                                                                              ,allow_row_locks = on
+                                                                              ,allow_page_locks = on
+                                                                            )on [primary]
+
+
+
+
 
 go
 
@@ -327,3 +356,8 @@ go
 alter table dbo.creditoviatura add constraint fk_creditoviatura_lkmarca 
 foreign key ( idmarca ) references dbo.lkmarca ( idmarca ) on update  no action  on delete  no action 
 	
+
+go
+
+
+
