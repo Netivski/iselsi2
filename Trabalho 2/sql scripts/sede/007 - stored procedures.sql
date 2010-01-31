@@ -35,6 +35,18 @@ as
 
 go
 
+print 'Create Procedure u_sp_produtotaeg_update'
+go
+create proc dbo.u_sp_produtotaeg_update @IdProdutoTaeg TIdentificador, @taeg TTaxa
+as 
+  update produtotaeg
+  set taeg = @taeg
+  where IdProdutoTaeg = @IdProdutoTaeg
+
+  return @@rowcount 
+
+go
+
 print 'Create Procedure u_sp_lkmarca_add'
 go
 create proc dbo.u_sp_lkmarca_add @nome TTxt50
@@ -208,4 +220,5 @@ if len( @sqlStat ) > 0
     execute( @sqlStat )    
   end 
 
+go
 
