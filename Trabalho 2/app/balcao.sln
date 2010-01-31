@@ -1,0 +1,69 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "balcao", "balcao\", "{92C90807-B935-4402-A4A7-1743F6A08654}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFramework = "3.5"
+		ProjectReferences = "{79BDDF83-9187-4621-8890-B8C7D0389549}|Persistence.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/balcao"
+		Debug.AspNetCompiler.PhysicalPath = "balcao\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\balcao\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/balcao"
+		Release.AspNetCompiler.PhysicalPath = "balcao\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\balcao\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "49434"
+	EndProjectSection
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "sede", "sede\", "{5A3E70CA-A669-4DE1-91A6-A495074008CD}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFramework = "3.5"
+		Debug.AspNetCompiler.VirtualPath = "/sede"
+		Debug.AspNetCompiler.PhysicalPath = "sede\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\sede\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/sede"
+		Release.AspNetCompiler.PhysicalPath = "sede\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\sede\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "49435"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "Common\Persistence\Persistence.csproj", "{79BDDF83-9187-4621-8890-B8C7D0389549}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{92C90807-B935-4402-A4A7-1743F6A08654}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92C90807-B935-4402-A4A7-1743F6A08654}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92C90807-B935-4402-A4A7-1743F6A08654}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{92C90807-B935-4402-A4A7-1743F6A08654}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{5A3E70CA-A669-4DE1-91A6-A495074008CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A3E70CA-A669-4DE1-91A6-A495074008CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A3E70CA-A669-4DE1-91A6-A495074008CD}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A3E70CA-A669-4DE1-91A6-A495074008CD}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{79BDDF83-9187-4621-8890-B8C7D0389549}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79BDDF83-9187-4621-8890-B8C7D0389549}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79BDDF83-9187-4621-8890-B8C7D0389549}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79BDDF83-9187-4621-8890-B8C7D0389549}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
