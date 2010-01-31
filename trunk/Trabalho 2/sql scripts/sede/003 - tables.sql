@@ -80,7 +80,9 @@ go
 print 'Create Table AvalistaLimite'
 go
 
-create table dbo.AvalistaLimite( nifAvalista  dbo.TNif, montante tMontante ) on [primary]
+print 'Create Table AvalistaLimite'
+go
 
+create table dbo.AvalistaLimite( nifAvalista  dbo.TNif, mtnMaximo tMontante, mtnKVincendo tMontante ) on [primary]
 
 

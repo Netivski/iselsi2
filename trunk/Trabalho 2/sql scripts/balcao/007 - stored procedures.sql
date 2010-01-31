@@ -255,9 +255,16 @@ as
    begin try
       begin transaction 
         exec @IdMorada = dbo.u_sp_morada_add @linha1, @linha2, @codpostal1, @codpostal2, @localidade, 1 
-        exec dbo.u_sp_titular_add            @nif, @nome,  @IdMorada, @dtNascimento,  @estadoCivil, @rendimentoAnual, @nib, 1 
-        exec dbo.u_sp_titularcontacto_add    @nif , @IdTipoContacto1, @contacto1, @iPreferencial1
-        exec dbo.u_sp_titularcontacto_add    @nif , @IdTipoContacto2, @contacto2, @iPreferencial2
+        if exists( select 1 from titular where nif = @nif  )
+         exec dbo.u_sp_titular_change          @nif, @nome,  @IdMorada, @dtNascimento,  @estadoCivil, @rendimentoAnual, @nib, 1  
+        else
+          exec dbo.u_sp_titular_add            @nif, @nome,  @IdMorada, @dtNascimento,  @estadoCivil, @rendimentoAnual, @nib, 1 
+        
+        if( @IdTipoContacto1 > 0 )
+          exec dbo.u_sp_titularcontacto_add    @nif , @IdTipoContacto1, @contacto1, @iPreferencial1
+
+        if( @IdTipoContacto2 > 0 )
+          exec dbo.u_sp_titularcontacto_add    @nif , @IdTipoContacto2, @contacto2, @iPreferencial2
       commit transaction
    end try
    begin catch
@@ -344,7 +351,29 @@ as
       return       
     end  
 
+  -- 006 - Validação se o cliente é financiavel.
+  if exists( select 1 from titular where nif = @nifTitular and iFinanciavel = 0)
+    begin
+      RAISERROR('Regra de negócio. o cliente não é financiavel.', 1, 2) WITH LOG
+      return       
+    end  
 
+  -- 007 - Validação se o cliente está na black list.
+  if exists( select 1 from blacklist where nif = @nifTitular)
+    begin
+      RAISERROR('Regra de negócio. o cliente não é financiavel (blacklist).', 1, 2) WITH LOG
+      return       
+    end  
+
+
+  -- 008 - Validação de limites dos avalistas.
+  if @mntKVincendo > @rendimentoAnual and exists( select 1 from AvalistaLimite where nifAvalista = @nifAvalista and ( mtnKVincendo + @montante ) > mtnMaximo )
+    begin
+      RAISERROR('Regra de negócio. o avalista passou o limite de crédito estabelecido..', 1, 2) WITH LOG
+      return             
+    end
+
+  
   insert into dossier( nifTitular, nifAvalista, moedaNome, IdProduto, prazo, periodicidade, taeg, montante, tipoProduto )
                values( @nifTitular, @nifAvalista, @moedaNome, @IdProduto, @prazo, @periodicidade, @taeg,@montante, @tipoProduto )
 
@@ -381,8 +410,8 @@ as
    begin try
       begin transaction 
         exec @idDossier = dbo.u_sp_dossier_registar  @nifTitular, @nifAvalista ,@moedaNome ,@IdProduto, @montante
-        insert into CreditoViatura( IdDossier, idMarca ,modelo, matricula )
-                            values( @idDossier, @idMarca, @modelo,  @matricula )
+        insert into CreditoViatura( IdDossier, nifAvalista, idMarca ,modelo, matricula )
+                            values( @idDossier, @nifAvalista, @idMarca, @modelo,  @matricula )
       commit transaction
    end try
    begin catch
@@ -409,6 +438,40 @@ as
   declare @idDossier TIdentificador
    begin try
       begin transaction 
+        exec @idDossier = dbo.u_sp_dossier_registar  @nifTitular, @nifAvalista ,@moedaNome ,@IdProduto, @montante
+        insert into CreditoObra( IdDossier, IdMorada, valorPatrimonial)
+                        values( @idDossier, @IdMorada, @valorPatrimonial )
+      commit transaction
+   end try
+   begin catch
+     rollback transaction
+     exec u_sp_throwError
+   end catch
+
+   return  @idDossier
+  
+           
+go               
+print 'Create Procedure u_sp_dossier_obras_registar_parte2 - Procedimento referente à implementação da alínea 2.a do Trabalho, segunda parte'
+go
+create proc dbo.u_sp_dossier_obras_registar_parte2
+                                               @nifTitular       TNif
+                                              ,@nifAvalista      TNif
+                                              ,@moedaNome        char(3)
+                                              ,@IdProduto        TIdentificador
+                                              ,@montante         TMontante
+                                              ,@linha1           TTxt100
+                                              ,@linha2           TTxt100
+                                              ,@codpostal1       smallint
+                                              ,@codpostal2       smallint
+                                              ,@localidade       TTxt50
+                                              ,@valorPatrimonial TMontante
+as 
+  declare @idDossier TIdentificador
+  declare @idMorada TIdentificador
+   begin try
+      begin transaction 
+        exec @idMorada  = dbo.u_sp_morada_add @linha1, @linha2, @codpostal1, @codpostal2, @localidade, 0
         exec @idDossier = dbo.u_sp_dossier_registar  @nifTitular, @nifAvalista ,@moedaNome ,@IdProduto, @montante
         insert into CreditoObra( IdDossier, IdMorada, valorPatrimonial)
                         values( @idDossier, @IdMorada, @valorPatrimonial )
@@ -762,3 +825,57 @@ as
 
   return @@rowcount
 
+go
+
+print 'Create Procedure u_sp_titularcontacto_del '
+go
+create proc dbo.u_sp_titularcontacto_del @nifTitular TNif, @IdTipoContacto TIdentificador
+as 
+  delete titularcontacto
+  where nifTitular     = @nifTitular
+    and IdTipoContacto = @IdTipoContacto
+
+  return @@rowcount
+
+
+go
+
+print 'Create Procedure u_sp_titularcontacto_update '
+go
+create proc dbo.u_sp_titularcontacto_update @nifTitular TNif, @IdTipoContacto TIdentificador, @contacto TTxt100, @iPreferencial TFlag
+as 
+  update titularcontacto
+  set  contacto      = @contacto
+      ,iPreferencial = @iPreferencial
+  where nifTitular     = @nifTitular
+    and IdTipoContacto = @IdTipoContacto
+
+  return @@rowcount
+
+go
+
+print 'Create Procedure u_sp_morada_update'
+go
+create proc dbo.u_sp_morada_update @idMorada TIdentificador, @linha1 TTxt100, @linha2 TTxt100, @codpostal1 smallint, @codpostal2 smallint, @localidade TTxt50, @principal TFlag
+as 
+  update morada
+  set  linha1     = @linha1
+      ,linha2     = @linha2
+      ,codpostal1 = @codpostal1
+      ,codpostal2 = @codpostal2
+      ,localidade = @localidade
+      ,principal  = @principal
+  where idMorada = @idMorada
+
+  return @@rowcount
+
+go
+
+print 'Create Procedure u_sp_morada_del'
+go
+create proc dbo.u_sp_morada_del @idMorada TIdentificador
+as 
+  delete  morada
+  where idMorada = @idMorada
+
+  return @@rowcount

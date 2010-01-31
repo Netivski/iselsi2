@@ -49,12 +49,13 @@ as
 
 go
 
-
 create view dbo.vTitularIncumprimento
 as
-  select nifTitular, sum(MntIncumprimento) As TotalMntIncumprimento 
-  from vDossierSaldo 
-  where MntIncumprimento > 0 
-  group by nifTitular
+  select titular.nif, titular.nome, sum(MntIncumprimento) As TotalMntIncumprimento 
+  from vDossierSaldo, titular 
+  where vDossierSaldo.nifTitular = titular.nif
+    and MntIncumprimento > 0 
+  group by titular.nif, titular.nome
+
 
 
