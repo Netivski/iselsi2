@@ -878,12 +878,26 @@ as
 
   return @@rowcount
 
+go
 
---print 'Create Procedure u_sp_pagamento_add'
---go
---create proc dbo.u_sp_pagamento_add @balcao sysname, @nif TNif, @montante TMontante, @idDossier TIdentificador 
---as
---  insert into Pagamento(balcao, nif, montante, idDossier )
---  values( @balcao , @nif , @montante , @idDossier )
---  
---  select * from sede.
+print 'Create Procedure u_sp_pagamento_externo'
+go
+create proc dbo.u_sp_pagamento_externo @balcao sysname, @nif TNif, @montante TMontante, @idDossier TIdentificador 
+as  
+  insert into Pagamento(balcao, nif, montante, idDossier )
+  values( @balcao , @nif , @montante , @idDossier )
+
+  if @@error != 0 return  
+
+  begin try
+     begin distributed transaction		  
+		  exec sede.sede.dbo.u_sp_pagamento_add @balcao, @nif, @montante, @idDossier 
+     commit transaction
+  end try
+  begin catch     
+     rollback transaction 
+     exec dbo.u_sp_throwError 
+  end catch
+
+go
+
