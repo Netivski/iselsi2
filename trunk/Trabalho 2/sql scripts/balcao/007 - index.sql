@@ -1,7 +1,3 @@
-use balcao
-
-go
-
 
 print 'Table Morada - Create Primary Key pk_morada'
 go

@@ -1,6 +1,3 @@
-use balcao
-
-go
 
 
 print 'Create Table Morada'
@@ -207,3 +204,14 @@ print 'Create Table AvalistaLimite'
 go
 
 create table dbo.AvalistaLimite( nifAvalista  dbo.TNif, mtnMaximo tMontante, mtnKVincendo tMontante ) on [primary]
+
+
+print 'Create Table Pagamento'
+go
+
+create table Pagamento(  balcao      sysname
+                        ,nif         dbo.TNif
+                        ,montante    dbo.TMontante
+                        ,idDossier   dbo.TIdentificador 
+                        ,dtPagamento dbo.TDt             default( getdate() ) 
+                      )

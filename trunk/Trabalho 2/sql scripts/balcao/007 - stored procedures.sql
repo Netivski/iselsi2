@@ -1,7 +1,3 @@
-use balcao
-
-go
-
 
 print 'Create Procedure u_sp_lkMoeda_add'
 go
@@ -697,7 +693,7 @@ as
    begin try
       begin transaction 
         -- Estratégia - Apagar as relações ( morada e contacto ) e voltar a reconstruir
-        delete titularcontacto  where nifTitular = @nif
+            delete titularcontacto  where nifTitular = @nif
 			exec @newIdMorada = dbo.u_sp_morada_add @linha1, @linha2, @codpostal1, @codpostal2, @localidade, 1 
 			exec dbo.u_sp_titular_change         @nif, @nome,  @newIdMorada, @dtNascimento,  @estadoCivil, @rendimentoAnual, @nib, @iFinanciavel 
 			exec dbo.u_sp_titularcontacto_add    @nif , @IdTipoContacto1, @contacto1, @iPreferencial1
@@ -879,3 +875,13 @@ as
   where idMorada = @idMorada
 
   return @@rowcount
+
+
+print 'Create Procedure u_sp_pagamento_add'
+go
+create proc dbo.u_sp_pagamento_add @balcao sysname, @nif TNif, @montante TMontante, @idDossier TIdentificador 
+as
+  insert into Pagamento(balcao, nif, montante, idDossier )
+  values( @balcao , @nif , @montante , @idDossier )
+  
+  select * from sede.

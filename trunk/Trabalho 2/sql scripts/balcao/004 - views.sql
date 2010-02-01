@@ -1,8 +1,4 @@
  
-use balcao
-
-go
-
 
 create view dbo.vDossierActivo
 as

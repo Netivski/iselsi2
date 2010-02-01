@@ -2,8 +2,6 @@
 --                             Drop Statments
 --/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
 
-use balcao
-
 go
 if exists(select 1 from systypes where name='TSaldo') execute sp_droptype TSaldo
 go
