@@ -1,7 +1,7 @@
 1 - calculo da tx. de esforço do cliente
     deverá ser replicada pelos vários balcões
         definição do processo
-            a aplicação não mantem estado sobre a taxa de esforço
+            a aplicação não mantém estado sobre a taxa de esforço
             do titular. A validação se o cliente pode contrair o crédito
             tem como base o atributo titular.iFinanciavel
             este atributo é alterado pela sede, através do invocação 
@@ -11,8 +11,8 @@
             financiavel se estiver na blacklist.
        
 
-2 - calculo do limite estabelicido para o avalista
-    deverá ser replicado para os vários balções
+2 - calculo do limite estabelecido para o avalista
+    deverá ser replicado para os vários balcões 
             suportado na tabela AvalistaLimite
 
 
