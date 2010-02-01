@@ -25,6 +25,7 @@ EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "sede", "sede\", "{5A3E70CA-A669-4DE1-91A6-A495074008CD}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFramework = "3.5"
+		ProjectReferences = "{79BDDF83-9187-4621-8890-B8C7D0389549}|Persistence.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/sede"
 		Debug.AspNetCompiler.PhysicalPath = "sede\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\sede\"
