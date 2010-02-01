@@ -222,3 +222,18 @@ if len( @sqlStat ) > 0
 
 go
 
+print 'Create Procedure u_sp_pagamento_externo'
+go
+create proc dbo.u_sp_pagamento_externo @balcao sysname, @nif TNif, @montante TMontante, @idDossier TIdentificador 
+as
+  insert into Pagamento(balcao, nif, montante, idDossier )
+  values( @balcao , @nif , @montante , @idDossier )
+  
+  if @balcao = 'sintra'
+    begin
+      exec sintra.sintra.dbo.u_sp_u_sp_prestacao_pagamento @IdDossier, @montante
+    end
+  else if @balcao = 'vilamoura'
+    begin
+      exec vilamoura.vilamoura.dbo.u_sp_u_sp_prestacao_pagamento @IdDossier, @montante
+    end
