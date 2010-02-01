@@ -1,6 +1,3 @@
-use balcao
-
-go
 
 
 set nocount on
