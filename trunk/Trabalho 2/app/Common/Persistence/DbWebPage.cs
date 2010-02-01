@@ -23,7 +23,7 @@ namespace Persistence
 
         static DbWebPage()
         {
-            connectionString = ConfigurationSettings.AppSettings["ConnectionString"];
+            connectionString = ConfigurationSettings.AppSettings[ConfigurationSettings.AppSettings["balcao"]];
         }
 
         public DbWebPage()
