@@ -811,8 +811,10 @@ as
    group by dbo.u_f_area_geografica( m.codpostal1 )
 go
 
-go
 print 'Create Procedure u_sp_titular_financialvel - Procedimento referente à alteração de estado do indicador se o cliente é financiavel'
+
+go
+
 create proc dbo.u_sp_titular_financialvel @nif TNif, @iFinanciavel TFlag
 as
   update titular
@@ -877,11 +879,11 @@ as
   return @@rowcount
 
 
-print 'Create Procedure u_sp_pagamento_add'
-go
-create proc dbo.u_sp_pagamento_add @balcao sysname, @nif TNif, @montante TMontante, @idDossier TIdentificador 
-as
-  insert into Pagamento(balcao, nif, montante, idDossier )
-  values( @balcao , @nif , @montante , @idDossier )
-  
-  select * from sede.
+--print 'Create Procedure u_sp_pagamento_add'
+--go
+--create proc dbo.u_sp_pagamento_add @balcao sysname, @nif TNif, @montante TMontante, @idDossier TIdentificador 
+--as
+--  insert into Pagamento(balcao, nif, montante, idDossier )
+--  values( @balcao , @nif , @montante , @idDossier )
+--  
+--  select * from sede.
