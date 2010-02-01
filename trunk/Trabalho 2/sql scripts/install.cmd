@@ -3,8 +3,13 @@ call install.cmd
 cd ..
 
 
-cd balcao
+cd sintra
 call install.cmd
 cd ..
+
+cd vilamoura
+call install.cmd
+cd ..
+
 
 @pause

@@ -80,9 +80,18 @@ go
 print 'Create Table AvalistaLimite'
 go
 
+create table dbo.AvalistaLimite( nifAvalista  dbo.TNif, mtnMaximo tMontante, mtnKVincendo tMontante ) on [primary]
+
+go
+
 print 'Create Table AvalistaLimite'
 go
 
-create table dbo.AvalistaLimite( nifAvalista  dbo.TNif, mtnMaximo tMontante, mtnKVincendo tMontante ) on [primary]
+create table Pagamento(  balcao      sysname
+                        ,nif         dbo.TNif
+                        ,montante    dbo.TMontante
+                        ,idDossier   dbo.TIdentificador 
+                        ,dtPagamento dbo.TDt             default( getdate() ) 
+                      )
 
 

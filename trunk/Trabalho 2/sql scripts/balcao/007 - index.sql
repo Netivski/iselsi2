@@ -78,7 +78,7 @@ create unique nonclustered index uix_lkmarca on dbo.lkmarca (
                                                                       ,ignore_dup_key = off
                                                                       ,allow_row_locks = on
                                                                       ,allow_page_locks = on
-                                                                    ) on balcaoindexfilegroup
+                                                                    ) on indexfilegroup
 go
 
 print 'Table LkMoeda - Create Primary Key pk_lkmoeda'
@@ -117,7 +117,7 @@ create unique nonclustered index uix_produto on dbo.produto (
                                                                       ,ignore_dup_key = off
                                                                       ,allow_row_locks = on
                                                                       ,allow_page_locks = on
-                                                                    ) on balcaoindexfilegroup
+                                                                    ) on indexfilegroup
 go
 
 print 'Table ProdutoTaeg - Create Primary Key pk_ProdutoTaeg'

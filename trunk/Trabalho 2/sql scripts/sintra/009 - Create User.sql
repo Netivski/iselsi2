@@ -1,0 +1,8 @@
+USE [master]
+GO
+CREATE LOGIN [sintra] WITH PASSWORD=N'sintra.', DEFAULT_DATABASE=[sintra], DEFAULT_LANGUAGE=[Português], CHECK_EXPIRATION=OFF, CHECK_POLICY=OFF
+GO
+USE [sintra]
+GO
+CREATE USER [sintra] FOR LOGIN [sintra]
+GO
